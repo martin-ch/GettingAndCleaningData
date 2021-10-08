@@ -1,6 +1,6 @@
 ## Getting and Cleaning Data
 
-The script 'run_analysis.R' can be sourced into R
+The script [run_analysis.R](run_analysis.R) can be sourced into R
 and will immediately perform the required actions:
 
 1 Merges the training and the test sets to create one data set.
