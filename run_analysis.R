@@ -19,8 +19,8 @@ library(dplyr)
 run.extract <- function() {
 
   ##Download and unzip the data
-  #download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", "Dataset.zip", method = "curl")
-  #unzip("Dataset.zip")
+  download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", "Dataset.zip", method = "curl")
+  unzip("Dataset.zip")
   
   ##Extract the data into individual dataframes  
   df.test.subjects    <- read.csv("UCI HAR Dataset/test/subject_test.txt", header = FALSE)
@@ -82,7 +82,6 @@ run.df2 <- function(df) {
   df <- as.data.frame(df)
   
   df
-
 }
 
 
