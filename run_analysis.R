@@ -13,8 +13,8 @@
 ##
 
 ## Load relevant libraries
-library(data.table)  
-  
+library(dplyr)
+
 ## function to download source data, extract and name the relevant columns
 run.extract <- function() {
 
@@ -65,15 +65,28 @@ run.df1 <- function() {
 ## function to prepare the second tidy dataset
 
 run.df2 <- function(df) {
-  ## Convert dataframe into datatable
-  dt <- data.table(df)  
   ## group by Subject and Activity
-  ##dt <- dt[,c(mean(`Mean (x-axis acceleration)`),mean(`Mean (x-axis acceleration)`)), by=list(Subject, Activity)]
+  df <- df %>% 
+    group_by(Subject, Activity) %>%
+    summarize(mean(`Mean (x-axis acceleration)`),
+              mean(`Mean (y-axis acceleration)`),
+              mean(`Mean (z-axis acceleration)`),
+              mean(`Standard Deviation (x-axis acceleration)`),
+              mean(`Standard Deviation (y-axis acceleration)`),
+              mean(`Standard Deviation (z-axis acceleration)`))
+
+  names(df) <- c("Subject","Activity",
+                 "Mean (x-axis acceleration)","Mean (y-axis acceleration)","Mean (z-axis acceleration)",
+                 "Standard Deviation (x-axis acceleration)","Standard Deviation (y-axis acceleration)","Standard Deviation (z-axis acceleration)")
   
-  dt
+    
+  df
+
 }
-  
-##df0 <- run.extract()
+
+
+
+## Generate the two datasets
 df1 <- run.df1()
 df2 <- run.df2(df1)
 
