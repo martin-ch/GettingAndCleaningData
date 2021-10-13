@@ -77,9 +77,10 @@ run.df2 <- function(df) {
 
   names(df) <- c("Subject","Activity",
                  "Mean (x-axis acceleration)","Mean (y-axis acceleration)","Mean (z-axis acceleration)",
-                 "Standard Deviation (x-axis acceleration)","Standard Deviation (y-axis acceleration)","Standard Deviation (z-axis acceleration)")
+                 "Mean of Standard Deviation (x-axis acceleration)","Mean of Standard Deviation (y-axis acceleration)","Mean of Standard Deviation (z-axis acceleration)")
   
-    
+  df <- as.data.frame(df)
+  
   df
 
 }
