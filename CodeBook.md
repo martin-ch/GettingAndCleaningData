@@ -1,5 +1,11 @@
 ## Code Book
   
+### Variables
+Within the functions we store all the results in a dataframe variable called "df".  
+The result of the script are two dataframe variables:
+df1: The cleaned data before it's being grouped
+df2: The tidy dataset that is submitted as "DataSet.txt"
+
 ### Downloading the data
 the function "run.downlaod()" is downloading all the raw data for further processing.  
   
