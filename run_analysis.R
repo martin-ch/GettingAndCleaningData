@@ -21,29 +21,28 @@ run.extract <- function() {
   ## Download and unzip the data
   download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", "Dataset.zip", method = "curl")
   unzip("Dataset.zip")
-  
+
   ## Extract the data into individual dataframes  
-  
-  df.test.data        <- read.table("UCI HAR Dataset/test/X_test.txt")
+
+  ## prepare the variables to filter the extracted columns
+  df.columns         <- read.table("UCI HAR Dataset/features.txt")[,2]
+  df.columns.logical <- grepl("(mean|Mean|std)", df.columns)
+  df.columns.match   <- df.columns[df.columns.logical]
+    
+  ## 
+  df.test.data        <- read.table("UCI HAR Dataset/test/X_test.txt")[,df.columns.logical]
   df.test.subjects    <- read.csv  ("UCI HAR Dataset/test/subject_test.txt", header = FALSE)
   df.test.activities  <- read.csv  ("UCI HAR Dataset/test/y_test.txt",       header = FALSE)
   df.test             <- cbind(df.test.subjects, df.test.activities, df.test.data)
   
-  df.train.data       <- read.table("UCI HAR Dataset/train/X_train.txt")
+  df.train.data       <- read.table("UCI HAR Dataset/train/X_train.txt")[,df.columns.logical]
   df.train.subjects   <- read.csv  ("UCI HAR Dataset/train/subject_train.txt", header = FALSE)
   df.train.activities <- read.csv  ("UCI HAR Dataset/train/y_train.txt",       header = FALSE)
   df.train <- cbind(df.train.subjects, df.train.activities, df.train.data)
   
   ## Merge the Test and Training datasets
   df <- rbind(df.test, df.train)
-
-  ## Name the columns
-  df.columns<- read.table("UCI HAR Dataset/features.txt")[,2]
   names(df)  <- c("Subject","Activity ID", df.columns)
-
-  # Create a logical vector to show the columns that contain Mean, mean or std
-  df.columns.match <- grepl("(mean|Mean|std)", df.columns)
-  df <- df[, c(TRUE, TRUE, df.columns.match)]
 
   ## Return the dataframe
   df
