@@ -14,18 +14,12 @@ The function "run.extract()" first downloads and unzips all data.
   
 According to "README.txt" in the source data, the columns in "X_train.txt" and "X_test.txt"  
 are structured according to "features.txt".  
-This is, the six first columns of the test and train datasets are the ones relevant for us.  
-1 tBodyAcc-mean()-X  
-2 tBodyAcc-mean()-Y  
-3 tBodyAcc-mean()-Z  
-4 tBodyAcc-std()-X  
-5 tBodyAcc-std()-Y  
-6 tBodyAcc-std()-Z  
-  
+We need to extract all columns that contain either "mean()" or "std()"
+
 That information has to be combined with the relevant subject ("subject_train.txt" and "subject_test.txt") and related activities   ("y_train.txt" and "x_train.txt"). To convert the numeric activities to descriptive activity names,  
 the mapping table "activity_labels.txt" is being used.  
   
-The function "run.extract()" extracts therefore then the six columns for mean and standard deviation    
+The function "run.extract()" extracts therefore then the relevant columns containing mean and standard deviation data    
 and adds the subject and activities to it.  
 Finally also descriptive column names are added.  
   
